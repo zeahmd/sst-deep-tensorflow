@@ -1,0 +1,8 @@
+tensorflow
+numpy
+nltk
+pytreebank
+loguru
+tqdm
+scikit-learn
+click

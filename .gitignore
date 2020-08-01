@@ -1,0 +1,22 @@
+# ignore all pycache files...
+__pycache__/
+
+# ignore eidtor files
+.vscode/
+.idea/
+
+# ignore venv files
+venv/
+
+# ignore embedding-vector models
+*.vec
+
+# ignore trained h5 keras models
+trained/
+
+#ignore tensorboard files
+tensorboard_logs/
+
+
+
+
