@@ -19,8 +19,10 @@ CONTEXT_SETTINGS = dict(help_option_names=['-h', '--help'])
 @click.option("-w", "--weights", is_flag=True, help="write weights, works if tensorboard enabled")
 @click.option("-g", "--gradients", is_flag=True, help="write gradients, works if tensorboard enabled")
 @click.option("-s", "--save", is_flag=True, help="save model")
+@click.option("--test", is_flag=True, help="test mode otherwise training by default")
+@click.option("-f", "--filename", help="saved keras model name")
 def run(name, root, binary, epochs, batch, optim, patience, tensorboard,
-        weights, gradients, save):
+        weights, gradients, save, test, filename):
     """
     SST Details:\n
     -----------\n
@@ -32,8 +34,13 @@ def run(name, root, binary, epochs, batch, optim, patience, tensorboard,
     SST Models: rnn, lstm, gru, bilstm, conv1d
 
     """
-    train(name, root, binary, epochs, batch, optim, patience, tensorboard, weights,
-          gradients, save)
+    if not test:
+        train(name, root, binary, epochs, batch, optim, patience, tensorboard, weights,
+              gradients, save)
+    else:
+        from testing import test
+        test(filename)
+
 
 
 if __name__ == "__main__":

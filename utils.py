@@ -5,6 +5,7 @@ from os import path
 import os
 from loguru import logger
 import shutil
+import tensorflow as tf
 
 def setup_tensorboard_dirs(model_name=''):
     if not path.exists(join(os.getcwd(), 'tensorboard_logs/{}'.format(model_name))):
@@ -30,8 +31,17 @@ def save_model_file(model_name="", model=None, filename=""):
     model.save(join(join(os.getcwd(), 'trained/{}'.format(model_name)), filename))
     logger.info("Model has been saved with name: {filename}")
 
-def load_model(model_name=""):
-    pass
+def load_saved_model(filename=""):
+    if path.exists(join(os.getcwd(),filename)):
+        try:
+            return tf.keras.models.load_model(join(os.getcwd(), filename))
+        except OSError:
+            logger.error("Invalid model file!")
+            os._exit(0)
+    else:
+        logger.error(f"Model for {filename.split('/')[1]} with name {filename.split('/')[2]} dont exist!")
+        os._exit(0)
+
 
 def root_and_binary_title(root, binary):
     if root:
