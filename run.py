@@ -39,7 +39,7 @@ def run(name, root, binary, epochs, batch, optim, patience, tensorboard,
               gradients, save)
     else:
         from testing import test
-        test(filename)
+        test(root, binary, filename)
 
 
 
