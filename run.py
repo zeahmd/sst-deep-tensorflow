@@ -20,7 +20,7 @@ CONTEXT_SETTINGS = dict(help_option_names=['-h', '--help'])
 @click.option("-g", "--gradients", is_flag=True, help="write gradients, works if tensorboard enabled")
 @click.option("-s", "--save", is_flag=True, help="save model")
 @click.option("--test", is_flag=True, help="test mode otherwise training by default")
-@click.option("-f", "--filename", help="saved keras model name")
+@click.option("-f", "--filename", help="saved keras model file path")
 def run(name, root, binary, epochs, batch, optim, patience, tensorboard,
         weights, gradients, save, test, filename):
     """
