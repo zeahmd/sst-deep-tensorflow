@@ -207,7 +207,7 @@ def train(name='lstm', root=False, binary=False, epochs=30, batch_size=32, optim
             else:
                 stopping_step += 1
 
-            if stopping_step > patience:
+            if stopping_step >= patience:
                 logger.info("EarlyStopping!")
 
                 save_model_file(model_name=name,

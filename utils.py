@@ -27,7 +27,7 @@ def save_model_file(model_name="", model=None, filename=""):
             pass
 
     model.save(join(join(os.getcwd(), 'trained/{}'.format(model_name)), filename))
-    logger.info("Model has been saved with name: {filename}")
+    logger.info(f"Model has been saved with name: {filename}")
 
 def load_saved_model(filename=""):
     if path.exists(join(os.getcwd(),filename)):
