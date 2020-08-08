@@ -5,7 +5,11 @@ def convert_lowercase(text):
     return text.lower()
 
 def tokenize(text):
-    return nltk.word_tokenize(text)
+    try:
+        return nltk.word_tokenize(text)
+    except LookupError:
+        nltk.download('punkt')
+        return nltk.word_tokenize(text)
 
 def remove_token_whitespaces(tokens):
     for i in range(len(tokens)):
@@ -13,11 +17,20 @@ def remove_token_whitespaces(tokens):
     return tokens
 
 def lemmatize(tokens):
-    lemmatizer = WordNetLemmatizer()
+    try:
+        lemmatizer = WordNetLemmatizer()
 
-    for i in range(len(tokens)):
-        tokens[i] = lemmatizer.lemmatize(tokens[i])
-    return tokens
+        for i in range(len(tokens)):
+            tokens[i] = lemmatizer.lemmatize(tokens[i])
+        return tokens
+    except LookupError:
+        nltk.download('wordnet')
+        lemmatizer = WordNetLemmatizer()
+
+        for i in range(len(tokens)):
+            tokens[i] = lemmatizer.lemmatize(tokens[i])
+        return tokens
+
 
 def preprocess_sst(phrase):
     return ' '.join(
