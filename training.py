@@ -191,14 +191,14 @@ def train(name='lstm', root=False, binary=False, epochs=30, batch_size=32, optim
             # Print train, dev, test loss
             # Print train, dev, test accuracy
             logger.info(
-                f"epoch={epoch+1}, train loss={train_loss.result():.4f}, dev loss={dev_loss.result():.4f}, test loss={test_loss.result():.4f}")
-            logger.info(f"epoch={epoch+1}, train accuracy={train_accuracy.result()*100:.2f},"
+                f"epoch={epoch+1}, model={name}, train loss={train_loss.result():.4f}, dev loss={dev_loss.result():.4f}, test loss={test_loss.result():.4f}")
+            logger.info(f"epoch={epoch+1}, model={name}, train accuracy={train_accuracy.result()*100:.2f},"
                         f" dev accuracy={dev_accuracy.result()*100:.2f},"
                         f" test accuracy={test_accuracy.result()*100:.2f}")
-            logger.info(f"epoch={epoch+1}, test precision={test_precision*100:.2f},"
+            logger.info(f"epoch={epoch+1}, model={name}, test precision={test_precision*100:.2f},"
                         f" test recall={test_recall*100:.2f},"
                         f" test f1-score={test_f1_score*100:.2f}")
-            logger.info(f"epoch={epoch+1}, test confusion matrix= \n" + str(cm))
+            logger.info(f"epoch={epoch+1}, model={name}, test confusion matrix= \n" + str(cm))
 
             # Implement early stopping here
             if test_loss.result() < best_loss:
