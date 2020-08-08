@@ -64,7 +64,7 @@ def RNN_Model(weights, vocab_size, embedding_size, max_sen_len, num_classes):
         Dropout(0.2),
         Dense(64, activation='relu', kernel_initializer=initializer, name='relu_dense1'),
         BatchNormalization(),
-        Dense(64, activation='relu', kernel_initializer=initializer, name='relu_dense2'),
+        Dense(32, activation='relu', kernel_initializer=initializer, name='relu_dense2'),
         BatchNormalization(),
         Dense(num_classes, activation='softmax', name='softmax_dense')
     ])
