@@ -15,9 +15,9 @@ def test(root, binary, filename=""):
     pred_Y = np.argmax(pred_Y, axis=1)
 
     accuracy_value = accuracy_score(test_Y, pred_Y)
-    precision_value = precision_score(test_Y, pred_Y, average='micro', zero_division=1)
-    recall_value = recall_score(test_Y, pred_Y, average='micro', zero_division=1)
-    f1_score_value = f1_score(test_Y, pred_Y, average='micro', zero_division=1)
+    precision_value = precision_score(test_Y, pred_Y, average='macro')
+    recall_value = recall_score(test_Y, pred_Y, average='macro')
+    f1_score_value = f1_score(test_Y, pred_Y, average='macro', )
     cm = confusion_matrix(test_Y, pred_Y, labels=np.sort(np.unique(np.array(test_Y))))
 
     logger.info(f"accuracy: {accuracy_value}, precision: {precision_value}, recall: {recall_value}, f1-score: {f1_score_value}")

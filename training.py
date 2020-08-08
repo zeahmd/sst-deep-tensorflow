@@ -79,9 +79,9 @@ def eval_epoch(model, loss_func, eval_dataset, num_batches, eval_loss_metric, ev
             y_true += y_eval.numpy().tolist()
             y_pred += preds.numpy().tolist()
 
-    return precision_score(y_true, y_pred, average='micro', zero_division=1),\
-           recall_score(y_true, y_pred, average='micro', zero_division=1),\
-           f1_score(y_true, y_pred, average='micro', zero_division=1),\
+    return precision_score(y_true, y_pred, average='macro'),\
+           recall_score(y_true, y_pred, average='macro'),\
+           f1_score(y_true, y_pred, average='macro'),\
            confusion_matrix(y_true, y_pred, labels=np.sort(np.unique(np.array(y_true))))
 
 def train(name='lstm', root=False, binary=False, epochs=30, batch_size=32, optim='adam', patience=np.inf,
@@ -191,14 +191,14 @@ def train(name='lstm', root=False, binary=False, epochs=30, batch_size=32, optim
             # Print train, dev, test loss
             # Print train, dev, test accuracy
             logger.info(
-                f"epoch={epoch}, train loss={train_loss.result():.4f}, dev loss={dev_loss.result():.4f}, test loss={test_loss.result():.4f}")
-            logger.info(f"epoch={epoch}, train accuracy={train_accuracy.result()*100:.2f},"
+                f"epoch={epoch+1}, train loss={train_loss.result():.4f}, dev loss={dev_loss.result():.4f}, test loss={test_loss.result():.4f}")
+            logger.info(f"epoch={epoch+1}, train accuracy={train_accuracy.result()*100:.2f},"
                         f" dev accuracy={dev_accuracy.result()*100:.2f},"
                         f" test accuracy={test_accuracy.result()*100:.2f}")
-            logger.info(f" test precision={test_precision*100:.2f},"
+            logger.info(f"epoch={epoch+1}, test precision={test_precision*100:.2f},"
                         f" test recall={test_recall*100:.2f},"
                         f" test f1-score={test_f1_score*100:.2f}")
-            logger.info("epoch={epoch}, test confusion matrix= \n" + str(cm))
+            logger.info(f"epoch={epoch+1}, test confusion matrix= \n" + str(cm))
 
             # Implement early stopping here
             if test_loss.result() < best_loss:
