@@ -95,9 +95,6 @@ def train(name='lstm', root=False, binary=False, epochs=30, batch_size=32, optim
 
     logger.info(f"test size: {len(train_X)}, dev size: {len(dev_X)}, test size: {len(test_X)}")
 
-    train_X, train_Y = train_X[:1000], train_Y[:1000]
-    dev_X, dev_Y = dev_X[:500], dev_Y[:500]
-    test_X, test_Y = test_X[:500], test_Y[:500]
 
     train_dataset = tf.data.Dataset.from_tensor_slices((train_X, train_Y))
     dev_dataset = tf.data.Dataset.from_tensor_slices((dev_X, dev_Y))

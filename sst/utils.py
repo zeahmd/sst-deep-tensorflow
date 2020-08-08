@@ -22,7 +22,6 @@ def loadFastTextModel(path=''):
                     coefs = np.asarray(values[1:], dtype='float32')
                     embeddings_index[word] = coefs
                     pbar.update(1)
-                    break
 
         return embeddings_index
     except FileNotFoundError:
