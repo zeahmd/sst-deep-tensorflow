@@ -198,7 +198,7 @@ def train(name='lstm', root=False, binary=False, epochs=30, batch_size=32, optim
             logger.info(f" test precision={test_precision*100:.2f},"
                         f" test recall={test_recall*100:.2f},"
                         f" test f1-score={test_f1_score*100:.2f}")
-            logger.info("epoch={epoch}, confusion matrix= \n" + str(cm))
+            logger.info("epoch={epoch}, test confusion matrix= \n" + str(cm))
 
             # Implement early stopping here
             if test_loss.result() < best_loss:

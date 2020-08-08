@@ -19,6 +19,7 @@ class SSTContainer:
         self.test_set = self.__preprocess_dataset(split='test', dataset=sst)
 
         self.tokenizer = SSTTokenizer(corpus=self.train_set[0]+self.dev_set[0]+self.test_set[0])
+        del sst
 
 
     def __preprocess_dataset(self, split, dataset):
