@@ -105,15 +105,15 @@ def buildModel(name='lstm', word_index={}, vocab_size=16222, max_sen_len=56, num
     embeddings_index = loadFastTextModel(path='sst/embedding/crawl-300d-2M.vec')
     embedding_matrix = buildEmbeddingMatrix(word_index, vocab_size, EMBEDDING_SIZE, embeddings_index)
 
-    if name is 'lstm':
+    if name == 'lstm':
         return LSTM_Model(embedding_matrix, vocab_size, EMBEDDING_SIZE, max_sen_len, num_classes)
-    elif name is 'gru':
+    elif name == 'gru':
         return GRU_Model(embedding_matrix, vocab_size, EMBEDDING_SIZE, max_sen_len, num_classes)
-    elif name is 'rnn':
+    elif name == 'rnn':
         return RNN_Model(embedding_matrix, vocab_size, EMBEDDING_SIZE, max_sen_len, num_classes)
-    elif name is 'bilstm':
+    elif name == 'bilstm':
         return BiLSTM_Model(embedding_matrix, vocab_size, EMBEDDING_SIZE, max_sen_len, num_classes)
-    elif name is 'conv1d':
+    elif name == 'conv1d':
         return Conv1d_Model(embedding_matrix, vocab_size, EMBEDDING_SIZE, max_sen_len, num_classes)
     else:
         logger.error(f"Invalid model name {name}")
