@@ -4,6 +4,7 @@ import os
 from loguru import logger
 from tensorflow.keras.utils import to_categorical
 from sst.preprocessing import preprocess_sst
+from sst.utils import get_binary_label
 
 
 class SSTContainer:
@@ -33,7 +34,7 @@ class SSTContainer:
                         text.append(
                             preprocess_sst(tree.to_labeled_lines()[0][1])
                         )
-                        sentiment.append(tree.to_labeled_lines()[0][0])
+                        sentiment.append(get_binary_label(tree.to_labeled_lines()[0][0]))
             else:
                 for tree in split_dataset:
                     text.append(
@@ -51,7 +52,7 @@ class SSTContainer:
                                 preprocess_sst(subtree[1])
                             )
                             sentiment.append(
-                                subtree[0]
+                                get_binary_label(subtree[0])
                             )
 
             else:

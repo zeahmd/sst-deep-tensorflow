@@ -12,17 +12,17 @@ from utils import setup_tensorboard_dirs, save_model_file, root_and_binary_title
 from tensorboardwriter import tensorboard_write_metrics, tensorboard_write_weights, tensorboard_write_grads, tensorboard_write_prf
 from sklearn.metrics import precision_score, recall_score, f1_score, confusion_matrix
 
-def get_optimizer(optim='adam'):
-    if optim is 'adam':
-        return  Adam()
-    elif optim is 'adagrad':
-        return Adagrad()
-    elif optim is 'sgd':
-        return SGD()
-    elif optim is 'rmsprop':
-        return RMSprop()
-    elif optim is 'adadelta':
-        return Adadelta()
+def get_optimizer(optim='adam', learning_rate=1e-3):
+    if optim == 'adam':
+        return  Adam(learning_rate=learning_rate)
+    elif optim == 'adagrad':
+        return Adagrad(learning_rate=learning_rate)
+    elif optim == 'sgd':
+        return SGD(learning_rate=learning_rate)
+    elif optim == 'rmsprop':
+        return RMSprop(learning_rate=learning_rate)
+    elif optim == 'adadelta':
+        return Adadelta(learning_rate=learning_rate)
     else:
         logger.error(f"Invalid optim {optim}")
         os._exit(0)
@@ -84,8 +84,8 @@ def eval_epoch(model, loss_func, eval_dataset, num_batches, eval_loss_metric, ev
            f1_score(y_true, y_pred, average='macro'),\
            confusion_matrix(y_true, y_pred, labels=np.sort(np.unique(np.array(y_true))))
 
-def train(name='lstm', root=False, binary=False, epochs=30, batch_size=32, optim='adam', patience=np.inf,
-          tensorboard=False, write_weights=False, write_grads=False, save_model=True):
+def train(name='lstm', root=False, binary=False, epochs=30, batch_size=32, optim='adam', learning_rate=1e-3,
+          patience=np.inf, tensorboard=False, write_weights=False, write_grads=False, save_model=True):
 
 
     dataset_container = SSTContainer(root=root, binary=binary)
@@ -104,7 +104,7 @@ def train(name='lstm', root=False, binary=False, epochs=30, batch_size=32, optim
     dev_dataset = dev_dataset.batch(batch_size=batch_size)
     test_dataset = test_dataset.batch(batch_size=batch_size)
 
-    optimizer = get_optimizer(optim=optim)
+    optimizer = get_optimizer(optim=optim, learning_rate=learning_rate)
 
 
     if tensorboard:
