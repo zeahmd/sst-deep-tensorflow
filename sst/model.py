@@ -12,18 +12,15 @@ def LSTM_Model(weights, vocab_size, embedding_size, max_sen_len, num_classes):
         Embedding(vocab_size, embedding_size, weights=[weights], trainable=False,
         input_shape=(max_sen_len,)),
         LSTM(32, return_sequences=True),
-        BatchNormalization(),
         Dropout(0.1),
         LSTM(64, return_sequences=True),
-        BatchNormalization(),
-        Dropout(0.1),
+        Dropout(0.3),
         LSTM(32),
-        BatchNormalization(),
         Dropout(0.2),
         Dense(64, activation='relu', name='relu_dens1'),
+        Dropout(0.2),
         BatchNormalization(),
         Dense(32, activation='relu', name='relu_dense2'),
-        BatchNormalization(),
         Dense(num_classes, activation='softmax', name='softmax_dense')
     ])
 
@@ -33,18 +30,15 @@ def GRU_Model(weights, vocab_size, embedding_size, max_sen_len, num_classes):
         Embedding(vocab_size, embedding_size, weights=[weights], trainable=False,
         input_shape=(max_sen_len,)),
         GRU(32, return_sequences=True, kernel_initializer=initializer, recurrent_initializer=initializer),
-        BatchNormalization(),
         Dropout(0.1),
         GRU(64, return_sequences=True, kernel_initializer=initializer, recurrent_initializer=initializer),
-        BatchNormalization(),
-        Dropout(0.1),
+        Dropout(0.3),
         GRU(16),
-        BatchNormalization(),
         Dropout(0.2),
         Dense(64, activation='relu', kernel_initializer=initializer, name='relu_dense1'),
+        Dropout(0.2),
         BatchNormalization(),
         Dense(32, activation='relu', kernel_initializer=initializer, name='relu_dense2'),
-        BatchNormalization(),
         Dense(num_classes, activation='softmax', name='softmax_dense')
     ])
 
@@ -54,18 +48,15 @@ def RNN_Model(weights, vocab_size, embedding_size, max_sen_len, num_classes):
         Embedding(vocab_size, embedding_size, weights=[weights], trainable=False,
         input_shape=(max_sen_len,)),
         SimpleRNN(32, return_sequences=True, kernel_initializer=initializer, recurrent_initializer=initializer),
-        BatchNormalization(),
         Dropout(0.1),
         SimpleRNN(64, return_sequences=True, kernel_initializer=initializer, recurrent_initializer=initializer),
-        BatchNormalization(),
-        Dropout(0.1),
+        Dropout(0.3),
         SimpleRNN(16),
-        BatchNormalization(),
         Dropout(0.2),
         Dense(64, activation='relu', kernel_initializer=initializer, name='relu_dense1'),
+        Dropout(0.3),
         BatchNormalization(),
         Dense(32, activation='relu', kernel_initializer=initializer, name='relu_dense2'),
-        BatchNormalization(),
         Dense(num_classes, activation='softmax', name='softmax_dense')
     ])
 
@@ -74,7 +65,6 @@ def Conv1d_Model(weights, vocab_size, embedding_size, max_sen_len, num_classes):
         Embedding(vocab_size, embedding_size, weights=[weights], trainable=False,
         input_shape=(max_sen_len,)),
         Conv1D(128, 3, strides=1, padding='SAME', activation='relu'),
-        BatchNormalization(),
         Dropout(0.1),
         Conv1D(256, 3, strides=1, padding='SAME', activation='relu'),
         BatchNormalization(),
@@ -83,9 +73,9 @@ def Conv1d_Model(weights, vocab_size, embedding_size, max_sen_len, num_classes):
         BatchNormalization(),
         Dropout(0.2),
         Dense(64, activation='relu', name='relu_dens1'),
+        Dropout(0.3),
         BatchNormalization(),
         Dense(32, activation='relu', name='relu_dense2'),
-        BatchNormalization(),
         Dense(num_classes, activation='softmax', name='softmax_dense')
     ])
 
@@ -94,18 +84,15 @@ def BiLSTM_Model(weights, vocab_size, embedding_size, max_sen_len, num_classes):
         Embedding(vocab_size, embedding_size, weights=[weights], trainable=False,
         input_shape=(max_sen_len,)),
         Bidirectional(LSTM(32, return_sequences=True)),
-        BatchNormalization(),
         Dropout(0.1),
         Bidirectional(LSTM(64, return_sequences=True)),
-        BatchNormalization(),
-        Dropout(0.1),
+        Dropout(0.2),
         Bidirectional(LSTM(32)),
-        BatchNormalization(),
         Dropout(0.2),
         Dense(64, activation='relu', name='relu_dens1'),
+        Dropout(0.3),
         BatchNormalization(),
         Dense(32, activation='relu', name='relu_dense2'),
-        BatchNormalization(),
         Dense(num_classes, activation='softmax', name='softmax_dense')
     ])
 
