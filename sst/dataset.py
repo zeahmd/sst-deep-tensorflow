@@ -47,7 +47,7 @@ class SSTContainer:
             if self.binary:
                 for tree in split_dataset:
                     for subtree in tree.to_labeled_lines():
-                        if subtree[0] != 0:
+                        if subtree[0] != 2:
                             text.append(
                                 preprocess_sst(subtree[1])
                             )
