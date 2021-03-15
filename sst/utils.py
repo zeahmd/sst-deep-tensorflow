@@ -3,23 +3,25 @@ from loguru import logger
 from tqdm import tqdm
 import os
 
+
 def get_binary_label(sentiment):
     if sentiment <= 1:
         return 0
     else:
         return 1
 
-def loadFastTextModel(path=''):
+
+def loadFastTextModel(path=""):
     logger.info("Loading FastText Model!")
     embeddings_index = dict()
 
     try:
-        with open(path, 'r') as f:
-            with tqdm(total=1999996, desc='loading FastText') as pbar:
+        with open(path, "r") as f:
+            with tqdm(total=1999996, desc="loading FastText") as pbar:
                 for line in f:
-                    values = line.strip().split(' ')
+                    values = line.strip().split(" ")
                     word = values[0]
-                    coefs = np.asarray(values[1:], dtype='float32')
+                    coefs = np.asarray(values[1:], dtype="float32")
                     embeddings_index[word] = coefs
                     pbar.update(1)
 
